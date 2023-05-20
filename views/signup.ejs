@@ -18,13 +18,18 @@
     </div>
     <div>
         <label for="password">Confirm:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="conf_password" name="conf_password" required>
       </div>
     <div>
       <button type="submit">Login</button>
     </div>
   </form>
-  
+  <% if (typeof successMessage !== "undefined")  { %>
+    <script>
+      alert('<%= successMessage %>');
+      window.location.href = "/login";
+    </script>
+  <% } %>
   <%- include("footer.ejs") %>
 </body>
 </html>

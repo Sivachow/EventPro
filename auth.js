@@ -11,6 +11,29 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
   res.render('signup'); 
 });
+
+router.post('/signup', async (req, res) =>{
+  const{username, password, conf_password} = req.body;
+  console.log(username, password, conf_password); 
+  try{
+    const user = await User.findOne({username});
+    if(user){
+      res.status(409);
+      return res.redirect('signin');
+    }
+    else if(password !=conf_password){
+      res.status(409);
+      return res.redirect('signin');
+    }
+    const new_user = new User({username, password});
+    await new_user.save();
+    const successMessage = "Success Registration";
+    res.render('signup', { successMessage });
+  }
+  catch(error){
+    console.error(error);
+  }
+});
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
   
@@ -18,7 +41,6 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ username });
 
     if (!user) {
-      console.log(user.username);
       return res.redirect('/login'); // User not found, redirect back to the login page
     }
     
