@@ -27,7 +27,7 @@ mongoose
   });
 
 app.get("/", (req, res) => {
-  res.send("Hi");
+  res.render('dashboard');
 });
 
 app.use('/', authRoutes);

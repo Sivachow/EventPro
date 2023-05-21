@@ -19,11 +19,11 @@ router.post('/signup', async (req, res) =>{
     const user = await User.findOne({username});
     if(user){
       res.status(409);
-      return res.redirect('signin');
+      return res.redirect('signup');
     }
     else if(password !=conf_password){
       res.status(409);
-      return res.redirect('signin');
+      return res.redirect('signup');
     }
     const new_user = new User({username, password});
     await new_user.save();
