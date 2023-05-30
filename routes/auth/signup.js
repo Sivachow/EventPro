@@ -21,23 +21,20 @@ router.post("/signup", async (req, res) => {
     cfc_id,
     prov,
   } = req.body;
-  console.log(
-    username,
-    password,
-    conf_password,
-    first_name,
-    last_name,
-    cfc_id,
-    prov
-  );
   try {
     const user = await User.findOne({ username });
     if (user) {
       res.status(409).send("Invalid Creds");
+      return;
     } else if (password != conf_password) {
       res.status(409).send("Invalid Creds");
+      return;
     }
-    const cfc_rating = await getRating(cfc_id);
+    let cfc_rating;
+    if(cfc_id)
+      cfc_rating= await getRating(cfc_id);
+    else
+      cfc_rating = 0;
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
     const new_user = new User({

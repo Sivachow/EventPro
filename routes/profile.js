@@ -10,6 +10,5 @@ router.get('/profile', authorize, async (req, res) => {
     catch(err){
         console.error(err);
     }
-    //res.render('profile'); 
   });
   module.exports = router;
