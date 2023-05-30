@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<%- include("head.ejs") %>
+<head>
+  <title>Tournaments</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    #calendar {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tournament-details {
+      background-color: #f2f2f2;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 400px;
+    }
+
+    .tournament-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .tournament-description,
+    .tournament-time {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="calendar"></div>
+
+  <div id="tournament-details" class="tournament-details" style="display: none;">
+    <h3 class="tournament-title" id="tournament-title"></h3>
+    <p class="tournament-description" id="tournament-description"></p>
+    <p class="tournament-time" id="tournament-time"></p>
+  </div>
+
+  <script>
+    // Retrieve tournament data from your backend or define it within this JavaScript code
+    var tournaments = [
+      {
+        title: 'Tournament 1',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        start: '2023-05-31T10:00:00',
+        end: '2023-05-31T12:00:00'
+      },
+      {
+        title: 'Tournament 2',
+        description: 'Sed feugiat mauris eget nunc lacinia malesuada.',
+        start: '2023-06-05T14:00:00',
+        end: '2023-06-05T16:00:00'
+      },
+      {
+        title: 'Tournament 3',
+        description: 'Vestibulum vel ligula condimentum, interdum justo vel, congue tellus.',
+        start: '2023-06-10T09:00:00',
+        end: '2023-06-10T11:00:00'
+      }
+    ];
+
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        events: tournaments,
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        defaultDate: moment().format('YYYY-MM-DD'),
+        eventClick: function(calEvent) {
+          showTournamentDetails(calEvent);
+        }
+      });
+    });
+
+    function showTournamentDetails(event) {
+      var title = event.title;
+      var description = event.description;
+      var start = moment(event.start).format('YYYY-MM-DD HH:mm');
+      var end = moment(event.end).format('YYYY-MM-DD HH:mm');
+
+      $('#tournament-title').text(title);
+      $('#tournament-description').text(description);
+      $('#tournament-time').text('Time: ' + start + ' - ' + end);
+
+      $('#tournament-details').show();
+    }
+  </script>
+</body>
+<%- include("footer.ejs") %>
+</html>

@@ -1,19 +1,63 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html>
-    <head>
-        <%- include("head.ejs") %>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-        <%- include("./nav.ejs") %>
-    </head>
-    <body>
-        
-        <h1> Dash Board</h1>
-        <%- include("footer.ejs") %>
-    </body>
+<%- include("head.ejs") %>
+<head>
+    
+    <title>Registered Players</title>
+    <style>
+        .dashboard_body body {
+            font-family: Arial, sans-serif;
+        }
+        .dashboard_body h1 {
+            text-align: center;
+        }
+        .dashboard_body table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+        }
+        .dashboard_body th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        .dashboard_body tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+        .dashboard_body th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body class ="dashboard_body">
+    <h1 class ="dashboard_body">Registered Players</h1>
+    <table class ="dashboard_body">
+        <tr class ="dashboard_body">
+            <th class ="dashboard_body">Name</th>
+            <th class ="dashboard_body">Rating</th>
+            <th class ="dashboard_body">FIDE ID</th>
+            <th class ="dashboard_body">Province</th>
+        </tr>
+        <tr class ="dashboard_body">
+            <td class ="dashboard_body">Player 1</td>
+            <td class ="dashboard_body">2200</td>
+            <td class ="dashboard_body">12345678</td>
+            <td class ="dashboard_body">Ontario</td>
+        </tr>
+        <tr class ="dashboard_body">
+            <td class ="dashboard_body">Player 2</td>
+            <td class ="dashboard_body">2300</td>
+            <td class ="dashboard_body">87654321</td>
+            <td class ="dashboard_body">Quebec</td>
+        </tr>
+        <tr class ="dashboard_body">
+            <td class ="dashboard_body">Player 3</td>
+            <td class ="dashboard_body">2400</td>
+            <td class ="dashboard_body">12348765</td>
+            <td class ="dashboard_body">British Columbia</td>
+        </tr>
+    </table>
+</body>
+<%- include("footer.ejs") %>
 </html>

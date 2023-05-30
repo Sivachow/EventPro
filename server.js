@@ -1,51 +1,33 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
-const bcrypt = require("bcrypt");
-const authRoutes = require('./auth');
-const dashboard = require('./dashboard');
+const connectDB = require("./config/db");
 const app = express();
+
+const authRoutes = require("./routes/auth/auth");
 
 const PORT = process.env.PORT || 3000;
 
-app.set('view engine', 'ejs');
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
+app.set("view engine", "ejs");
 
 //MongoDB connection
-mongoose
-  .connect(
-    "mongodb+srv://SivaChow:j8802vQScp0pKqO6@cluster0.aoufobc.mongodb.net/?retryWrites=true&w=majority"
-  )
-  .then(() => {
-    console.log("MongoDB connected");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+connectDB();
 
+//Init Middleware
+app.use(express.json({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+
+//Home Routes
 app.get("/", (req, res) => {
-  res.render('dashboard');
+  res.render("home");
 });
+app.use(express.static("/Users/siva/Desktop/EvenPro/"));
 
-app.use('/', authRoutes);
-app.use('/', dashboard);
+//Auth Routes
 
-process.env["SECRET"] = "foo";
+for (const route in authRoutes) {
+  app.use("/", authRoutes[route]);
+}
 
-app.use(
-  session({
-    secret: "my-secret-key", // Replace with your actual secret key
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://SivaChow:j8802vQScp0pKqO6@cluster0.aoufobc.mongodb.net/?retryWrites=true&w=majority", // Replace with your MongoDB connection URL
-      autoRemove: "interval",
-      autoRemoveInterval: 60, // Number of minutes after which to remove expired sessions
-    }),
-  })
-);
+app.use("/", require("./routes/dashboard"));
+app.use("/", require("./routes/profile"));
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
