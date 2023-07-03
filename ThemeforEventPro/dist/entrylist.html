@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.min.css" />
+    <title>Edmonton Chess Club</title>
+  </head>
+  <body>
+    <nav class="navbar bg-dark">
+      <a href="index.html" class="logo-link">
+        <img class="logo" src="../logo.png" />
+        <h1 class="club-name">Edmonton Chess Club</h1>
+      </a>
+      <ul>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="Signup.html">Signup</a></li>
+      </ul>
+    </nav>
+    <section class="container">
+      <h1 class="large text-primary">Entry List</h1>
+
+      <div class="total_registered">
+        Total Registered: <span id="total_registered_count">0</span>
+      </div>
+
+      <table class="entry_list_table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Province</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="entry_list_row">
+            <td>John Doe</td>
+            <td>Ontario</td>
+            <td>1800</td>
+          </tr>
+          <tr class="entry_list_row">
+            <td>Jane Smith</td>
+            <td>Alberta</td>
+            <td>2000</td>
+          </tr>
+          <!-- Add more entries here -->
+        </tbody>
+      </table>
+      <div class="buttons">
+        <a href="login.html" class="btn">Register</a>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function () {
+          var totalRegisteredCount = $(".entry_list_table tbody tr").length;
+          $("#total_registered_count").text(totalRegisteredCount);
+        });
+      </script>
+    </section>
+  </body>
+</html>

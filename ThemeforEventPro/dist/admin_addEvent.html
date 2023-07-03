@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.min.css" />
+    <title>Edmonton Chess Club</title>
+  </head>
+  <body>
+    <nav class="navbar bg-dark">
+      <a href="index.html" class="logo-link">
+        <img class="logo" src="../logo.png" />
+        <h1 class="club-name">Edmonton Chess Club</h1>
+      </a>
+      <ul>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="Signup.html">Signup</a></li>
+      </ul>
+    </nav>
+    <section class="container">
+      <h1 class="large text-primary">Events</h1>
+
+      <form class="admin_addEvent_form">
+        <div class="admin_addEvent_form-group">
+          <label for="admin_addEvent_date">Start Date:</label>
+          <input type="date" id="admin_addEvent_date" required />
+        </div>
+
+        <div class="admin_addEvent_form-group">
+          <label for="admin_addEvent_name">Event:</label>
+          <input type="text" id="admin_addEvent_name" required />
+        </div>
+
+        <div class="admin_addEvent_form-group">
+          <label for="admin_addEvent_time">Time:</label>
+          <input type="text" id="admin_addEvent_time" required />
+        </div>
+
+        <div class="admin_addEvent_form-group">
+          <label for="admin_addEvent_location">Location:</label>
+          <input type="text" id="admin_addEvent_location" required />
+        </div>
+
+        <div class="admin_addEvent_form-group">
+          <label for="admin_addEvent_description">Description:</label>
+          <textarea id="admin_addEvent_description" required></textarea>
+        </div>
+
+        <div class="admin_addEvent_form-group">
+          <label for="admin_addEvent_recur_weekly">Recur Weekly:</label>
+          <input type="checkbox" id="admin_addEvent_recur_weekly" />
+        </div>
+
+        <div class="admin_addEvent_form-group">
+          <label for="admin_addEvent_recur_until">Recur Until:</label>
+          <input type="date" id="admin_addEvent_recur_until" />
+        </div>
+
+        <div class="buttons">
+          <input type="submit" value="Submit" class="btn" />
+        </div>
+      </form>
+    </section>
+
+    <style>
+      .large {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .text-primary {
+        color: #337ab7;
+      }
+
+      .admin_addEvent_form-group {
+        margin-bottom: 20px;
+      }
+
+      .admin_addEvent_form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .admin_addEvent_form input[type="text"],
+      .admin_addEvent_form input[type="date"],
+      .admin_addEvent_form textarea {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+    </style>
+  </body>
+</html>

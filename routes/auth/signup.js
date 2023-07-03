@@ -13,21 +13,21 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", async (req, res) => {
   let {
-    username,
+    name,
+    email,
     password,
-    conf_password,
-    first_name,
-    last_name,
     cfc_id,
-    prov,
+    province,
   } = req.body;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
+    const cfc_exists = await User.findOne({ cfc_id });
     if (user) {
-      res.status(409).send("Invalid Creds");
+      res.status(400).json({errors : [{msg: "User Already Exists"}]});
       return;
-    } else if (password != conf_password) {
-      res.status(409).send("Invalid Creds");
+    }
+    if (cfc_exists) {
+      res.status(400).json({errors : [{msg: "CFC ID Already Exists"}]});
       return;
     }
     let cfc_rating;
@@ -38,13 +38,12 @@ router.post("/signup", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
     const new_user = new User({
-      username,
+      email,
       password,
-      first_name,
-      last_name,
+      name,
       cfc_id,
       cfc_rating,
-      prov,
+      province,
     });
     await new_user.save();
     const payload = {

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.min.css" />
+    <title>Edmonton Chess Club</title>
+  </head>
+  <body>
+    <nav class="navbar bg-dark">
+      <a href="index.html" class="logo-link">
+        <img class="logo" src="../logo.png" />
+        <h1 class="club-name">Edmonton Chess Club</h1>
+      </a>
+      <ul>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="Signup.html">Signup</a></li>
+      </ul>
+    </nav>
+    <section class="container">
+      <h1 class="large text-primary">Entry List</h1>
+    
+      <div class="total_registered">
+        Total Registered: <span id="total_registered_count">0</span>
+      </div>
+    
+      <table class="entry_list_admin">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Province</th>
+            <th>Rating</th>
+            <th>CFC ID</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="entry_admin">
+            <td>John Doe</td>
+            <td>Ontario</td>
+            <td>1800</td>
+            <td>12345</td>
+            <td class="entry_list_action"><i class="fas fa-edit"></i></td>
+          </tr>
+          <tr class="entry_admin">
+            <td>Jane Smith</td>
+            <td>Alberta</td>
+            <td>2000</td>
+            <td>12345</td>
+            <td class="entry_list_action"><i class="fas fa-edit"></i></td>
+          </tr>
+          <!-- Add more entries here -->
+        </tbody>
+      </table>
+      <div class="buttons">
+        <button id="downloadBtn" class="btn">Download CSV</button>
+      </div>
+    
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function () {
+          // Function to convert the table data to CSV format
+          function convertToCSV() {
+            var csv = [];
+            var rows = $(".entry_list_admin tbody tr");
+
+            rows.each(function () {
+              var rowData = [];
+              var cols = $(this).find("td");
+
+              cols.each(function () {
+                rowData.push($(this).text());
+              });
+
+              csv.push(rowData.join(","));
+            });
+
+            return csv.join("\n");
+          }
+
+          // Function to download the table data as a CSV file
+          function downloadCSV() {
+            var csvData = convertToCSV();
+            var blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+
+            if (navigator.msSaveBlob) {
+              // For IE browser
+              navigator.msSaveBlob(blob, "entry_list.csv");
+            } else {
+              // For other browsers
+              var link = document.createElement("a");
+              if (link.download !== undefined) {
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", "entry_list.csv");
+                link.style.visibility = "hidden";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }
+            }
+          }
+
+          // Attach click event handler to the download button
+          $("#downloadBtn").click(function () {
+            downloadCSV();
+          });
+
+          var totalRegisteredCount = $(".entry_list_admin tbody tr").length;
+          $("#total_registered_count").text(totalRegisteredCount);
+
+          $(".entry_list_action").click(function () {
+            // Handle edit action here
+            // You can retrieve the entry information using $(this).closest(".entry_admin") and perform the necessary actions
+          });
+        });
+      </script>
+    </section>
+    
+            
+  </body>
+</html>

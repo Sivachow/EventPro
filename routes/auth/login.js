@@ -4,27 +4,35 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../modules/User");
 const config = require("config");
+const auth = require("../../middleware/auth")
 
 // Login route
-router.get("/login", (req, res) => {
-  res.render("login");
+router.get("/login", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (error) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user_login = await User.findOne({ username });
+    const user_login = await User.findOne({ email });
 
     if (!user_login) {
-      return res.status(400).json({ msg: "Invalid Creds" });
+      res.status(400).json({errors : [{msg: "Invalid Credentials"}]});
+      return;
     }
 
     if (!bcrypt.compare(password, user_login.password)) {
-      console.log("Invalid Creds");
-      return res.status(400).json({ msg: "Invalid Creds" }); // Incorrect password, redirect back to the login page
+      res.status(400).json({errors : [{msg: "Invalid Credentials"}]});
+      return;
     }
-
+    
     const payload = {
       user: {
         id: user_login.id,
@@ -37,8 +45,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: 3600 },
       (err, token) => {
         if (err) throw err;
-        console.log(token);
-        res.json({ msg: "Login Successfull", t: token });
+        res.json({ msg: "Login Successfull", token: token });
       }
     );
   } catch (error) {

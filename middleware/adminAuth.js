@@ -11,7 +11,7 @@ module.exports = function(req, res, next){
     try {
         const decoded = jwt.verify(token, config.get("jwtSecret"));
         req.user = decoded.user;
-        if(req.user.id != '64768573d63d5f328cf44113')
+        if(req.user.email != 'NandipatiSiva@icloud.com')
             return res.status(401).json({msg:"Not Admin"});
         next();
     } catch (error) {

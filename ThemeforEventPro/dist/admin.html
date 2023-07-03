@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.min.css" />
+    <title>Edmonton Chess Club</title>
+  </head>
+  <body>
+    <nav class="navbar bg-dark">
+      <a href="index.html" class="logo-link">
+        <img class="logo" src="../logo.png" />
+        <h1 class="club-name">Edmonton Chess Club</h1>
+      </a>
+      <ul>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="Signup.html">Signup</a></li>
+      </ul>
+    </nav>
+    <section class="container">
+        <h1 class="large text-primary">Admin Page</h1>
+      
+        <div class="admin_searchBox">
+          <input type="text" id="admin_searchInput" placeholder="Search users...">
+          <button id="admin_searchButton">Search</button>
+        </div>
+      
+        <table class="admin_userList_table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>CFC ID</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>User 1</td>
+              <td>user1@example.com</td>
+              <td>123</td>
+              <td>
+                <a href="user_profile.html?id=1" class="admin_userList_viewBtn">View Profile</a>
+              </td>
+            </tr>
+            <tr>
+              <td>User 2</td>
+              <td>user2@example.com</td>
+              <td>4567</td>
+              <td>
+                <a href="user_profile.html?id=2" class="admin_userList_viewBtn">View Profile</a>
+              </td>
+            </tr>
+            <tr>
+                <td>Siva 2</td>
+                <td>user2@example.com</td>
+                <td>32324</td>
+                <td>
+                  <a href="user_profile.html?id=2" class="admin_userList_viewBtn">View Profile</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Siva Nandipati 2</td>
+                <td>user2@example.com</td>
+                <td>23456</td>
+                <td>
+                  <a href="user_profile.html?id=2" class="admin_userList_viewBtn">View Profile</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Nandipati Ramesh 2</td>
+                <td>user2@example.com</td>
+                <td>123456</td>
+                <td>
+                  <a href="user_profile.html?id=2" class="admin_userList_viewBtn">View Profile</a>
+                </td>
+              </tr>
+            <!-- Add more users here -->
+          </tbody>
+        </table>
+      </section>
+      
+      <script>
+        document.getElementById('admin_searchInput').addEventListener('input', function() {
+          var input = this.value.toLowerCase();
+          var table = document.querySelector('.admin_userList_table');
+          var rows = table.getElementsByTagName('tr');
+      
+          for (var i = 0; i < rows.length; i++) {
+            var name = rows[i].getElementsByTagName('td')[0];
+            var email = rows[i].getElementsByTagName('td')[1];
+            var cfcId = rows[i].getElementsByTagName('td')[2];
+      
+            if (name || email || cfcId) {
+              var nameValue = name.textContent || name.innerText;
+              var emailValue = email.textContent || email.innerText;
+              var cfcIdValue = cfcId.textContent || cfcId.innerText;
+      
+              if (nameValue.toLowerCase().indexOf(input) > -1 || emailValue.toLowerCase().indexOf(input) > -1 || cfcIdValue.toLowerCase().indexOf(input) > -1) {
+                rows[i].style.display = '';
+              } else {
+                rows[i].style.display = 'none';
+              }
+            }
+          }
+        });
+      </script>
+      
+      <style>
+
+        .admin_searchBox {
+          margin-bottom: 20px;
+        }
+      
+        .admin_searchBox input[type="text"] {
+          padding: 6px 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+          width: 300px;
+        }
+      
+        .admin_searchBox button {
+          padding: 6px 12px;
+          background-color: #337ab7;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 16px;
+          margin-left: 10px;
+        }
+      
+        .admin_userList_table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }
+      
+        .admin_userList_table th,
+        .admin_userList_table td {
+          padding: 10px;
+          border: 1px solid #ddd;
+          text-align: left;
+        }
+      
+        .admin_userList_table th {
+          background-color: #337ab7;
+          color: #fff;
+          font-weight: bold;
+        }
+      
+        .admin_userList_viewBtn {
+          display: inline-block;
+          padding: 6px 12px;
+          background-color: #337ab7;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 4px;
+        }
+      
+        .admin_userList_viewBtn:hover {
+          background-color: #23527c;
+        }
+      </style>
+      
+  </body>
+</html>
